@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ARK-toolbar" attributes="">
+  <template>
+    <link rel="stylesheet" href="ARK-toolbar.css">
+    <div id="toolbar">
+      <content></content>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer('ARK-toolbar', {
+
+        // public properties
+        publish: {
+
+          /**
+           * Toolbar alignment
+           * @attributes alignment
+           * @type {String} top|left|right|bottom
+           * @default 'top'
+           */
+          alignment:'top'
+
+        },
+
+        // on element creation
+        created: function(){
+
+          console.log('toolbar created');
+
+        }
+
+      });
+
+    })();
+  </script>
+</polymer-element>

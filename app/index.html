@@ -22,17 +22,13 @@
 
 <body unresolved>
 
-  <core-menu selected="0" selectedItem="{{item}}">
-    <core-item icon="settings" label="Settings"></core-item>
-    <core-item icon="dialog" label="Dialog"></core-item>
-    <core-item icon="search" label="Search"></core-item>
-  </core-menu>
-
-  <div class="hero-unit">
-    <yo-greeting></yo-greeting>
-    <p>You now have</p>
-    <yo-list></yo-list>
-  </div>
+  <ARK-toolbar>
+    <ARK-item>Properties</ARK-item>
+    <ARK-item>Paths</ARK-item>
+    <ARK-item>Pages</ARK-item>
+    <ARK-item>Parts</ARK-item>
+    <ARK-item>Pieces</ARK-item>
+  </ARK-toolbar>
 
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
