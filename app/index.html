@@ -22,15 +22,19 @@
 
 <body unresolved>
 
-  <ARK-toolbar>
-    <ARK-item>Properties</ARK-item>
-    <ARK-item>Paths</ARK-item>
-    <ARK-item>Pages</ARK-item>
-    <ARK-item>Parts</ARK-item>
-    <ARK-item>Pieces</ARK-item>
-  </ARK-toolbar>
+  <ark-tekt-router>
+    <ark-tekt-route path="/dashboard" page="dashboard"></ark-tekt-route>
+    <ark-tekt-route path="/properties" page="properties"></ark-tekt-route>
+    <ark-tekt-route path="/paths" page="paths"></ark-tekt-route>
+    <ark-tekt-route path="/pages" page="pages"></ark-tekt-route>
+    <ark-tekt-route path="/parts" page="parts"></ark-tekt-route>
+    <ark-tekt-route path="/pieces" page="pieces"></ark-tekt-route>
+  </ark-tekt-router>
+
+  <ark-tekt-view default="dashboard"></ark-tekt-view>
 
   <!-- build:js scripts/app.js -->
+  <script src="bower_components/lodash/dist/lodash.min.js"></script>
   <script src="scripts/app.js"></script>
   <!-- endbuild-->
 </body>
