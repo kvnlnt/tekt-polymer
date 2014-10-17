@@ -22,7 +22,7 @@
 
 <body unresolved>
 
-  <ark-tekt-router>
+  <ark-tekt-router id="router">
     <ark-tekt-route path="/dashboard" page="dashboard"></ark-tekt-route>
     <ark-tekt-route path="/properties" page="properties"></ark-tekt-route>
     <ark-tekt-route path="/paths" page="paths"></ark-tekt-route>
@@ -31,6 +31,15 @@
     <ark-tekt-route path="/pieces" page="pieces"></ark-tekt-route>
   </ark-tekt-router>
 
+  <ark-tekt-menu>
+    <ark-tekt-item path="/dashboard">ARK</ark-tekt-item>
+    <ark-tekt-item path="/properties">Properties</ark-tekt-item>
+    <ark-tekt-item path="/paths">Paths</ark-tekt-item>
+    <ark-tekt-item path="/pages">Pages</ark-tekt-item>
+    <ark-tekt-item path="/parts">Parts</ark-tekt-item>
+    <ark-tekt-item path="/pieces">Pieces</ark-tekt-item>
+  </ark-tekt-menu>
+  
   <ark-tekt-view default="dashboard"></ark-tekt-view>
 
   <!-- build:js scripts/app.js -->
