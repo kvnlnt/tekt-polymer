@@ -10,9 +10,12 @@
             loadView:this.loadView
         },
 
+        // load view
         loadView: function(view){
 
-            console.log(view);
+            var el = document.createElement('ark-tekt-'+view);
+            this.innerHTML = "";
+            this.appendChild(el);
 
         },
 
@@ -24,13 +27,22 @@
         },
 
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
-        domReady: function() {},
+        domReady: function() {
+
+            // load default view
+            scope.loadView(this.default);
+
+        },
 
         // Fires when the "<polymer-element>" has been fully prepared
         ready: function() {},
 
         // Fires when the element was inserted into the document
-        attached: function() {},
+        attached: function() {
+
+            ARK.view = this;
+
+        },
 
         // Fires when the element was removed from the document
         detached: function() {},

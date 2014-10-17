@@ -2,19 +2,10 @@
 
     var scope;
 
-    Polymer('ark-tekt-menu', {
+    Polymer('ark-tekt-pages', {
 
-        // publish properties
-        publish: {
-            items:[]
-        },
-
-        // add item
-        addItem: function(item){
-
-            scope.items.push(item);
-
-        },
+        // publish pages
+        publish: {},
 
         // Fires when an instance of the element is created
         created: function() { 
@@ -24,13 +15,7 @@
         },
 
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
-        domReady: function() {
-
-            // load default view
-            _.each(this.children, scope.addItem);
-
-
-        },
+        domReady: function() {},
 
         // Fires when the "<polymer-element>" has been fully prepared
         ready: function() {},
@@ -43,7 +28,6 @@
 
         // Fires when an attribute was added, removed, or updated
         attributeChanged: function(attr, oldVal, newVal) {}
-
     });
 
 })();

@@ -35,10 +35,8 @@
             // add all routes
             _.each(this.children, scope.addRoute);
 
-            scope.loadRoute('/properties');
-
             // dump
-            console.log(scope.routes);
+            // console.log(scope.routes);
 
         },
 
@@ -46,7 +44,11 @@
         ready: function() {},
 
         // Fires when the element was inserted into the document
-        attached: function() {},
+        attached: function() {
+
+            ARK.router = this;
+
+        },
 
         // Fires when the element was removed from the document
         detached: function() {},

@@ -2,18 +2,19 @@
 
     var scope;
 
-    Polymer('ark-tekt-menu', {
+    Polymer('ark-tekt-item', {
 
         // publish properties
         publish: {
-            items:[]
+            path:'/'
         },
 
-        // add item
-        addItem: function(item){
+        clicked: function(event, detail, item){
 
-            scope.items.push(item);
-
+            var page = ARK.router.routes[item.path];
+            ARK.view.loadView(page);
+            return page;
+            
         },
 
         // Fires when an instance of the element is created
@@ -24,13 +25,7 @@
         },
 
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
-        domReady: function() {
-
-            // load default view
-            _.each(this.children, scope.addItem);
-
-
-        },
+        domReady: function() {},
 
         // Fires when the "<polymer-element>" has been fully prepared
         ready: function() {},
