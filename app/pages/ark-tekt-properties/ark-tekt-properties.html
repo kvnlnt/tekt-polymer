@@ -4,11 +4,22 @@
   <template>
     <link rel="stylesheet" href="ark-tekt-properties.css">
     <h1>Properties</h1>
+    <button>New</button>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Property</th>
+        <th>Actions</th>
+      </tr>
     <template repeat="{{properties}}" id="properties">
-        <div>
-            {{id}} {{property}}
-        </div>
+      <tr>
+        <td>{{id}}</td>
+        <td>{{property}}</td>
+        <td><button>Edit</button><button>delete</button></td>
+      </tr>   
     </template>
+    </table>
+
   </template>
   <script src="ark-tekt-properties.js"></script>
 </polymer-element>

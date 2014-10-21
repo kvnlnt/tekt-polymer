@@ -14,33 +14,23 @@
   <!-- endbuild-->
 
   <script src="bower_components/platform/platform.js"></script>
-  <!-- build:vulcanized elements/elements.vulcanized.html -->
-  <link rel="import" href="elements/elements.html">
-
+  <!-- build:vulcanized elements.vulcanized.html -->
+  <link rel="import" href="pages/ark-tekt-dashboard/ark-tekt-dashboard.html"/>
+  <link rel="import" href="pages/ark-tekt-properties/ark-tekt-properties.html"/>
+  <link rel="import" href="pages/ark-tekt-paths/ark-tekt-paths.html"/>
+  <link rel="import" href="pages/ark-tekt-pages/ark-tekt-pages.html"/>
+  <link rel="import" href="pages/ark-tekt-parts/ark-tekt-parts.html"/>
+  <link rel="import" href="pages/ark-tekt-pieces/ark-tekt-pieces.html"/>
+  <link rel="import" href="parts/ark-tekt-menu/ark-tekt-menu.html"/>
+  <!-- <link rel="import" href="pieces/ark-tekt-test/ark-tekt-test.html"/> -->
   <!-- endbuild-->
 </head>
 
 <body unresolved>
-
-  <ark-tekt-router id="router">
-    <ark-tekt-route path="/dashboard" page="dashboard"></ark-tekt-route>
-    <ark-tekt-route path="/properties" page="properties"></ark-tekt-route>
-    <ark-tekt-route path="/paths" page="paths"></ark-tekt-route>
-    <ark-tekt-route path="/pages" page="pages"></ark-tekt-route>
-    <ark-tekt-route path="/parts" page="parts"></ark-tekt-route>
-    <ark-tekt-route path="/pieces" page="pieces"></ark-tekt-route>
-  </ark-tekt-router>
-
-  <ark-tekt-menu>
-    <ark-tekt-item path="/dashboard">ARK</ark-tekt-item>
-    <ark-tekt-item path="/properties">Properties</ark-tekt-item>
-    <ark-tekt-item path="/paths">Paths</ark-tekt-item>
-    <ark-tekt-item path="/pages">Pages</ark-tekt-item>
-    <ark-tekt-item path="/parts">Parts</ark-tekt-item>
-    <ark-tekt-item path="/pieces">Pieces</ark-tekt-item>
-  </ark-tekt-menu>
   
-  <ark-tekt-view default="properties"></ark-tekt-view>
+  <ark-tekt-view>
+    <ark-tekt-dashboard></ark-tekt-dashboard>
+  </ark-tekt-view>
 
   <!-- build:js scripts/app.js -->
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
