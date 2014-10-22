@@ -2,17 +2,11 @@
 
     var scope;
 
-    Polymer('ark-tekt-page', {
+    Polymer('ark-tekt-properties-new', {
 
         // publish properties
         publish: {
-            getPage:this.getPage
-        },
-
-        getPage: function(page){
-
-            console.log(page);
-
+            endpoint:'/properties',
         },
 
         // Fires when an instance of the element is created

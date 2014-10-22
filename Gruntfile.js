@@ -36,6 +36,7 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/*.html',
+          '<%= yeoman.app %>/core/{,*/}*.html',
           '<%= yeoman.app %>/pages/{,*/}*.html',
           '<%= yeoman.app %>/parts/{,*/}*.html',
           '<%= yeoman.app %>/pieces/{,*/}*.html',
@@ -54,6 +55,7 @@ module.exports = function (grunt) {
       styles: {
         files: [
           '<%= yeoman.app %>/styles/{,*/}*.css',
+          '<%= yeoman.app %>/core/{,*/}*.css',
           '<%= yeoman.app %>/pages/{,*/}*.css',
           '<%= yeoman.app %>/parts/{,*/}*.css',
           '<%= yeoman.app %>/pieces/{,*/}*.css',
@@ -63,6 +65,7 @@ module.exports = function (grunt) {
       sass: {
         files: [
           '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
+          '<%= yeoman.app %>/core/{,*/}*.{scss,sass}',
           '<%= yeoman.app %>/pages/{,*/}*.{scss,sass}',
           '<%= yeoman.app %>/parts/{,*/}*.{scss,sass}',
           '<%= yeoman.app %>/pieces/{,*/}*.{scss,sass}'
@@ -83,7 +86,8 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>',
           src: [
-            'styles/{,*/}*.{scss,sass}', 
+            'styles/{,*/}*.{scss,sass}',
+            'core/{,*/}*.{scss,sass}', 
             'pages/{,*/}*.{scss,sass}', 
             'parts/{,*/}*.{scss,sass}', 
             'pieces/{,*/}*.{scss,sass}'
@@ -97,7 +101,8 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>',
           src: [
-            'styles/{,*/}*.{scss,sass}', 
+            'styles/{,*/}*.{scss,sass}',
+            'core/{,*/}*.{scss,sass}',
             'pages/{,*/}*.{scss,sass}', 
             'parts/{,*/}*.{scss,sass}',
             'pieces/{,*/}*.{scss,sass}',
@@ -253,9 +258,11 @@ module.exports = function (grunt) {
             '*.{ico,txt}',
             '.htaccess',
             '*.html',
+            'core/**',
             'pages/**',
             'parts/**',
             'pieces/**',
+            '!core/**/*.scss',
             '!pages/**/*.scss',
             '!parts/**/*.scss',
             '!pieces/**/*.scss',
@@ -269,7 +276,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%= yeoman.app %>',
           dest: '.tmp',
-          src: ['{styles,pages,parts,pieces}/{,*/}*.css']
+          src: ['{styles,core,pages,parts,pieces}/{,*/}*.css']
         }]
       }
     },

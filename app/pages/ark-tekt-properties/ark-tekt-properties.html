@@ -3,18 +3,17 @@
 <polymer-element name="ark-tekt-properties" attributes="">
   <template>
     <link rel="stylesheet" href="ark-tekt-properties.css">
+    <ark-tekt-nav></ark-tekt-nav>
     <h1>Properties</h1>
-    <button>New</button>
+    <a href="/#/properties/new">New</a>
     <table>
       <tr>
-        <th>ID</th>
         <th>Property</th>
         <th>Actions</th>
       </tr>
     <template repeat="{{properties}}" id="properties">
       <tr>
-        <td>{{id}}</td>
-        <td>{{property}}</td>
+        <td><a href="/#/properties/{{id}}">{{property}}</a></td>
         <td><button>Edit</button><button>delete</button></td>
       </tr>   
     </template>

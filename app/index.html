@@ -15,25 +15,31 @@
 
   <script src="bower_components/platform/platform.js"></script>
   <!-- build:vulcanized elements.vulcanized.html -->
+  <link rel="import" href="core/ark-tekt-router/ark-tekt-router.html"/>
+  <link rel="import" href="core/ark-tekt-page/ark-tekt-page.html"/>
+  <link rel="import" href="parts/ark-tekt-menu/ark-tekt-menu.html"/>
+  <link rel="import" href="pieces/ark-tekt-nav/ark-tekt-nav.html"/>
   <link rel="import" href="pages/ark-tekt-dashboard/ark-tekt-dashboard.html"/>
   <link rel="import" href="pages/ark-tekt-properties/ark-tekt-properties.html"/>
+  <link rel="import" href="pages/ark-tekt-properties-new/ark-tekt-properties-new.html"/>
+  <link rel="import" href="pages/ark-tekt-properties-form/ark-tekt-properties-form.html"/>
   <link rel="import" href="pages/ark-tekt-paths/ark-tekt-paths.html"/>
   <link rel="import" href="pages/ark-tekt-pages/ark-tekt-pages.html"/>
   <link rel="import" href="pages/ark-tekt-parts/ark-tekt-parts.html"/>
   <link rel="import" href="pages/ark-tekt-pieces/ark-tekt-pieces.html"/>
-  <link rel="import" href="parts/ark-tekt-menu/ark-tekt-menu.html"/>
-  <!-- <link rel="import" href="pieces/ark-tekt-test/ark-tekt-test.html"/> -->
+  
+  
   <!-- endbuild-->
 </head>
 
 <body unresolved>
   
-  <ark-tekt-view>
-    <ark-tekt-dashboard></ark-tekt-dashboard>
-  </ark-tekt-view>
+  <ark-tekt-router></ark-tekt-router>
+  <ark-tekt-page></ark-tekt-page>
 
   <!-- build:js scripts/app.js -->
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="scripts/app.js"></script>
   <!-- endbuild-->
 </body>
