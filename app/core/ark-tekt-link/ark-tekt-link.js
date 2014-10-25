@@ -2,20 +2,31 @@
 
     var scope;
 
-    Polymer('ark-tekt-page', {
+    Polymer('ark-tekt-link', {
 
-        publish:{},
+        publish:{
+            link:''
+        },
+
+        clicked: function() {
+
+            ARK.router.routeTo(this.link);
+
+        },
 
         // Fires when an instance of the element is created
         created: function() {
 
             scope = this;
-            ARK.page = this;
 
         },
 
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
-        domReady: function() {},
+        domReady: function() {
+
+            $(this).on('click', scope.clicked);
+
+        },
 
         // Fires when the "<polymer-element>" has been fully prepared
         ready: function() {},

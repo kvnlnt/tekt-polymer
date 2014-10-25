@@ -158,10 +158,10 @@
             _.each(params, function(v, k){ page[k] = v; });
 
             // clear the page
-            scope.page.innerHTML = null;
+            ARK.page.innerHTML = null;
 
             // load the page
-            scope.page.appendChild(page);
+            ARK.page.appendChild(page);
 
 
         },
@@ -236,20 +236,20 @@
         created: function() {
 
             scope = this;
-            scope.page = document.getElementsByTagName('ark-tekt-page').item();
+            ARK.router = this;
 
         },
 
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
-        domReady: function() {},
-
-        // Fires when the "<polymer-element>" has been fully prepared
-        ready: function() {
+        domReady: function() {
 
             scope.loadPage(scope.route);
             scope.poll = setInterval(scope.checkHash, 200);
 
         },
+
+        // Fires when the "<polymer-element>" has been fully prepared
+        ready: function() {},
 
         // Fires when the element was inserted into the document
         attached: function() {},
