@@ -7,13 +7,16 @@
         publish:{
             poll:null,
             regex: /^<(int|string):(.*)>/, // token finder
-            route:'',
+            route:'#/dashboard',
+            default:'#/dashboard',
             routes:{
-                '':'ark-tekt-dashboard',
+                '#/error':'ark-tekt-error',
                 '#/dashboard':'ark-tekt-dashboard',
                 '#/properties':'ark-tekt-properties',
                 '#/properties/new':'ark-tekt-properties-new',
+                '#/properties/<int:id>':'ark-tekt-properties-view',
                 '#/properties/<int:id>/edit':'ark-tekt-properties-edit',
+                '#/properties/<int:id>/delete':'ark-tekt-properties-delete',
                 '#/paths':'ark-tekt-paths',
                 '#/pages':'ark-tekt-pages',
                 '#/parts':'ark-tekt-parts',
@@ -130,10 +133,20 @@
 
         },
 
+        /**
+         * Route to a hash
+         * @param  {string} route Example: path/to/find
+         */
+        routeTo: function(route){
+
+            window.location.hash = route;
+
+        },
+
         // load a page
         loadPage: function(route, params){
 
-            console.log('load ', route, params);
+            console.log('load', route, params);
 
             // get page element name
             var el = scope.routes[route];
@@ -192,13 +205,29 @@
             var hash = window.location.hash;
             var changed = scope.route !== hash;
 
+            // if hash is empty, route to default
+            if(hash.length === 0){
+                scope.routeTo(scope.default);
+                return false;
+            }
+
             // if yes, find route and load
             if(changed){
                 var route = scope.getRoute(hash);
-                route = _.keys(route)[0];
-                params = scope.getParams(route, hash);
-                scope.loadPage(route, params);
-                scope.route = hash;
+                var noRoute = _.isEmpty(route);
+
+                // if not route, route to error
+                if(noRoute){
+                    scope.routeTo('#/error');
+                    return false;
+                } else {
+                    route = _.keys(route)[0];
+                    params = scope.getParams(route, hash);
+                    scope.loadPage(route, params);
+                    scope.route = hash;
+                }
+                
+                
             }
 
         },
