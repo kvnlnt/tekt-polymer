@@ -5,12 +5,12 @@
     Polymer('ark-tekt-link', {
 
         publish:{
-            link:''
+            route:''
         },
 
         clicked: function() {
 
-            ARK.router.routeTo(this.link);
+            ARK.router.go(this.route);
 
         },
 

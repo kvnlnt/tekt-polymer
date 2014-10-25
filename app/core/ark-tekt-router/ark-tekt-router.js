@@ -135,11 +135,54 @@
 
         /**
          * Route to a hash
+         * this mechanism allows preservation of browser history
          * @param  {string} route Example: path/to/find
          */
-        routeTo: function(route){
+        go: function(hash){
 
-            window.location.hash = route;
+            var route = scope.getRoute(hash);
+            var noRoute = _.isEmpty(route);
+
+            // if not route, route to error
+            if(noRoute){
+                var error = '#/error';
+                scope.loadPage(error);
+                scope.route = error;
+                window.location.hash = '#/error';
+            } else {
+                route = _.keys(route)[0];
+                params = scope.getParams(route, hash);
+                scope.loadPage(route, params);
+                window.location.hash = hash;
+                scope.route = route;
+            }
+
+        },
+
+        /**
+         * If hash has changed, find route and load new page
+         * @return {n/a}
+         */
+        checkHash: function(){
+
+            // check if the hash has changed
+            var hash = window.location.hash;
+            var changed = scope.route !== hash;
+
+            // if hash is empty, route to default
+            if(hash.length === 0){
+                scope.go(scope.default);
+                return false;
+            }
+
+            // if yes, find route and load
+            if(changed){
+                var route = scope.getRoute(hash);
+                route = _.keys(route)[0];
+                params = scope.getParams(route, hash);
+                scope.loadPage(route, params);
+                scope.route = hash;
+            }
 
         },
 
@@ -147,6 +190,9 @@
         loadPage: function(route, params){
 
             console.log('load', route, params);
+
+            // params default
+            var params = params || {};
 
             // get page element name
             var el = scope.routes[route];
@@ -195,43 +241,6 @@
 
         },
 
-        /**
-         * If hash has changed, find route and load new page
-         * @return {n/a}
-         */
-        checkHash: function(){
-
-            // check if the hash has changed
-            var hash = window.location.hash;
-            var changed = scope.route !== hash;
-
-            // if hash is empty, route to default
-            if(hash.length === 0){
-                scope.routeTo(scope.default);
-                return false;
-            }
-
-            // if yes, find route and load
-            if(changed){
-                var route = scope.getRoute(hash);
-                var noRoute = _.isEmpty(route);
-
-                // if not route, route to error
-                if(noRoute){
-                    scope.routeTo('#/error');
-                    return false;
-                } else {
-                    route = _.keys(route)[0];
-                    params = scope.getParams(route, hash);
-                    scope.loadPage(route, params);
-                    scope.route = hash;
-                }
-                
-                
-            }
-
-        },
-
         // Fires when an instance of the element is created
         created: function() {
 
@@ -243,7 +252,6 @@
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
         domReady: function() {
 
-            scope.loadPage(scope.route);
             scope.poll = setInterval(scope.checkHash, 200);
 
         },

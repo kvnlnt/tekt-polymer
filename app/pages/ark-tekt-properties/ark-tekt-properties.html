@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="ark-tekt-properties.css">
     <ark-tekt-nav></ark-tekt-nav>
     <h1>Properties</h1>
-    <a href="/#/properties/new">New</a>
+    <ark-tekt-link route="#/properties/new">New</ark-tekt-link>
     <table>
       <tr>
         <th>Property</th>
@@ -13,10 +13,10 @@
       </tr>
     <template repeat="{{properties}}" id="properties">
       <tr>
-        <td><a href="/#/properties/{{id}}/view">{{property}}</a></td>
+        <td><ark-tekt-link route="#/properties/{{id}}">{{property}}</ark-tekt-link></td>
         <td>
-          <a href="/#/properties/{{id}}/edit">Edit</a>
-          <a href="/#/properties/{{id}}/delete">Delete</a>
+          <ark-tekt-link route="#/properties/{{id}}/edit">Edit</ark-tekt-link>
+          <ark-tekt-link route="#/properties/{{id}}/delete">Delete</ark-tekt-link>
         </td>
       </tr>   
     </template>
