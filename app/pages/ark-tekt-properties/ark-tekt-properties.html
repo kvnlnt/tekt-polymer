@@ -13,8 +13,11 @@
       </tr>
     <template repeat="{{properties}}" id="properties">
       <tr>
-        <td><a href="/#/properties/{{id}}">{{property}}</a></td>
-        <td><button>Edit</button><button>delete</button></td>
+        <td><a href="/#/properties/{{id}}/view">{{property}}</a></td>
+        <td>
+          <a href="/#/properties/{{id}}/edit">Edit</a>
+          <a href="/#/properties/{{id}}/delete">Delete</a>
+        </td>
       </tr>   
     </template>
     </table>

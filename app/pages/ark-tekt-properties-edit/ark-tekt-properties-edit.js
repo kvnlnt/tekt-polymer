@@ -2,12 +2,15 @@
 
     var scope;
 
-    Polymer('ark-tekt-page', {
+    Polymer('ark-tekt-properties-edit', {
 
-        publish:{},
+        // publish properties
+        publish: {
+            endpoint:'/properties',
+        },
 
         // Fires when an instance of the element is created
-        created: function() {
+        created: function() { 
 
             scope = this;
 
@@ -27,7 +30,6 @@
 
         // Fires when an attribute was added, removed, or updated
         attributeChanged: function(attr, oldVal, newVal) {}
-
     });
 
 })();
