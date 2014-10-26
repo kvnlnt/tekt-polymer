@@ -49,6 +49,7 @@
         // Fires when the "<polymer-element>" has been fully prepared
         ready: function() {
 
+            document.title = 'Properties';
             scope.properties = this.shadowRoot.getElementById('properties');
 
         },

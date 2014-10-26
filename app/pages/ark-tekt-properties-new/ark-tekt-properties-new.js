@@ -20,7 +20,11 @@
         domReady: function() {},
 
         // Fires when the "<polymer-element>" has been fully prepared
-        ready: function() {},
+        ready: function() {
+
+            document.title = 'New Property';
+
+        },
 
         // Fires when the element was inserted into the document
         attached: function() {},
