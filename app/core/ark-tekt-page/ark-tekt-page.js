@@ -14,6 +14,28 @@
 
         },
 
+        load: function(page, params){
+
+            console.log('load', page, params);
+
+            // params default
+            var params = params || {};
+
+            // create page object
+            var page = document.createElement(page);
+
+            // attach params
+            _.each(params, function(v, k){ page[k] = v; });
+
+            // clear the page
+            scope.innerHTML = null;
+
+            // load the page
+            scope.appendChild(page);
+
+
+        },
+
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
         domReady: function() {},
 

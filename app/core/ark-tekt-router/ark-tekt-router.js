@@ -7,8 +7,8 @@
         publish:{
             poll:null,
             regex: /^<(int|string):(.*)>/, // token finder
-            route:'#/dashboard',
-            default:'#/dashboard',
+            route:'',
+            default_hash:'#/dashboard',
             routes:{
                 '#/error':'ark-tekt-error',
                 '#/dashboard':'ark-tekt-dashboard',
@@ -25,27 +25,99 @@
         },
 
         /**
-         * Validate Type
-         * @param  {string} type   type
-         * @param  {string|number} param parameter
-         * @return {boolean}       
+         * Find route by path
+         * @param  {string} route a path. Example: path/to/find
+         * @return {string}       contents of route found
          */
-        validateType: function(type, param){
+        get: function(route){
 
-            var result;
+            // don't include url params
+            var route = route.split('?')[0];
 
-            switch(type) {
-                case 'int':
-                    result = !isNaN(param);
-                    break;
-                case 'string':
-                    result = isNaN(param);
-                    break;
-                default:
-                    result = false;
-            }
+            // find routes of same length
+            var found = _.pick(scope.routes, function(v,k){
+                var tokens = k.split('/');
+                var compare_tokens = route.split('/');
+                var sameLength = tokens.length === compare_tokens.length;
+                var isMatch = false;
+                if(sameLength){ isMatch = scope.match(tokens, compare_tokens); }
+                return sameLength && isMatch;
+            });
 
-            return result;
+            return found;
+
+        },
+
+        /**
+         * Route to a hash
+         * this mechanism allows preservation of browser history
+         * @param  {string} route Example: path/to/find
+         */
+        go: function(hash){
+
+            var route = scope.get(hash);
+            var noRoute = _.isEmpty(route);
+            var page;
+
+            // config
+            route  = noRoute ? '#/error' : _.keys(route)[0];
+            hash   = noRoute ? '#/error' : hash;
+            params = noRoute ? {} : scope.getParams(route, hash);
+            page   = scope.routes[route];
+
+            // load page
+            scope.route = hash;
+            window.location.hash = hash;
+            ARK.page.load(page, params);
+
+        },
+
+        /**
+         * If hash has changed, find route and load new page
+         * @return {n/a}
+         */
+        checkHash: function(hash){
+
+            // get or set hash
+            var hash = hash || window.location.hash;
+
+            // if it's empty, set it to the default
+            hash = 0 === hash.length ? scope.default_hash : hash;
+
+            // now let's see if it's changed
+            var changed = scope.route !== hash;
+
+            // if yes, find route and load
+            if(changed){ scope.go(hash); }
+
+        },
+
+        /**
+         * Get params from tokenized string
+         * @param  {string} route Example: #/path/<int:id>
+         * @param  {string} hash  Example: #/path/1
+         * @return {object}       Example: {id:1}
+         */
+        getParams: function(route, hash){
+
+            var params         = {};
+            var route_segments = route.split('/');
+            var hash_segments  = hash.split('?')[0].split('/');
+
+            // loop presumable tokenized segments
+            _.each(route_segments, function(v, k){
+
+                // is this a token?
+                var isRegex = scope.regex.test(v);
+
+                // if yes, get the value
+                if(isRegex){
+                    var token = scope.regex.exec(v)[2];
+                    params[token] = hash_segments[k];
+                }
+            });
+
+            return params;
 
         },
 
@@ -55,7 +127,7 @@
          * @param  {string} b route to test
          * @return {boolean}
          */
-        routeMatch: function(a,b){
+        match: function(a,b){
 
             // tokens collected container
             var tokens = [];
@@ -110,134 +182,27 @@
         },
 
         /**
-         * Find route by path
-         * @param  {string} route a path. Example: path/to/find
-         * @return {string}       contents of route found
+         * Validate Type
+         * @param  {string} type   type
+         * @param  {string|number} param parameter
+         * @return {boolean}       
          */
-        getRoute: function(route){
+        validateType: function(type, param){
 
-            // don't include url params
-            var route = route.split('?')[0];
+            var result;
 
-            // find routes of same length
-            var found = _.pick(scope.routes, function(v,k){
-                var tokens = k.split('/');
-                var compare_tokens = route.split('/');
-                var sameLength = tokens.length === compare_tokens.length;
-                var isMatch = false;
-                if(sameLength){ isMatch = scope.routeMatch(tokens, compare_tokens); }
-                return sameLength && isMatch;
-            });
-
-            return found;
-
-        },
-
-        /**
-         * Route to a hash
-         * this mechanism allows preservation of browser history
-         * @param  {string} route Example: path/to/find
-         */
-        go: function(hash){
-
-            var route = scope.getRoute(hash);
-            var noRoute = _.isEmpty(route);
-
-            // if not route, route to error
-            if(noRoute){
-                var error = '#/error';
-                scope.loadPage(error);
-                scope.route = error;
-                window.location.hash = '#/error';
-            } else {
-                route = _.keys(route)[0];
-                params = scope.getParams(route, hash);
-                scope.loadPage(route, params);
-                window.location.hash = hash;
-                scope.route = route;
+            switch(type) {
+                case 'int':
+                    result = !isNaN(param);
+                    break;
+                case 'string':
+                    result = isNaN(param);
+                    break;
+                default:
+                    result = false;
             }
 
-        },
-
-        /**
-         * If hash has changed, find route and load new page
-         * @return {n/a}
-         */
-        checkHash: function(){
-
-            // check if the hash has changed
-            var hash = window.location.hash;
-            var changed = scope.route !== hash;
-
-            // if hash is empty, route to default
-            if(hash.length === 0){
-                scope.go(scope.default);
-                return false;
-            }
-
-            // if yes, find route and load
-            if(changed){
-                var route = scope.getRoute(hash);
-                route = _.keys(route)[0];
-                params = scope.getParams(route, hash);
-                scope.loadPage(route, params);
-                scope.route = hash;
-            }
-
-        },
-
-        // load a page
-        loadPage: function(route, params){
-
-            console.log('load', route, params);
-
-            // params default
-            var params = params || {};
-
-            // get page element name
-            var el = scope.routes[route];
-
-            // create page object
-            var page = document.createElement(el);
-
-            // attach params
-            _.each(params, function(v, k){ page[k] = v; });
-
-            // clear the page
-            ARK.page.innerHTML = null;
-
-            // load the page
-            ARK.page.appendChild(page);
-
-
-        },
-
-        /**
-         * Get params from tokenized string
-         * @param  {string} route Example: #/path/<int:id>
-         * @param  {string} hash  Example: #/path/1
-         * @return {object}       Example: {id:1}
-         */
-        getParams: function(route, hash){
-
-            var params         = {};
-            var route_segments = route.split('/');
-            var hash_segments  = hash.split('?')[0].split('/');
-
-            // loop presumable tokenized segments
-            _.each(route_segments, function(v, k){
-
-                // is this a token?
-                var isRegex = scope.regex.test(v);
-
-                // if yes, get the value
-                if(isRegex){
-                    var token = scope.regex.exec(v)[2];
-                    params[token] = hash_segments[k];
-                }
-            });
-
-            return params;
+            return result;
 
         },
 
