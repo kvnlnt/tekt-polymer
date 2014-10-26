@@ -1,0 +1,18 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="ark-tekt-properties-form" attributes="">
+  <template>
+    <link rel="stylesheet" href="ark-tekt-properties-form.css">
+    <form id="form" method="{{method}}">
+        <div>
+            <label for="property">Property</label>
+            <input name="property" id="property" type="text" autofocus required placeholder="Example: mywebsite.com"/>
+        </div>
+        <div>
+            <button id="submit">Create</button>
+            <ark-tekt-link route="#/properties">Cancel</ark-tekt-link>
+        </div>
+    </form>
+  </template>
+  <script src="ark-tekt-properties-form.js"></script>
+</polymer-element>
