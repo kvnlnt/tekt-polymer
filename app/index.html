@@ -16,6 +16,7 @@
   <script src="bower_components/platform/platform.js"></script>
   <!-- build:vulcanized elements.vulcanized.html -->
   <link rel="import" href="core/ark-tekt-router/ark-tekt-router.html"/>
+  <link rel="import" href="core/ark-tekt-router/ark-tekt-route.html"/>
   <link rel="import" href="core/ark-tekt-page/ark-tekt-page.html"/>
   <link rel="import" href="core/ark-tekt-link/ark-tekt-link.html"/>
   <link rel="import" href="parts/ark-tekt-menu/ark-tekt-menu.html"/>
@@ -30,14 +31,25 @@
   <link rel="import" href="pages/ark-tekt-pages/ark-tekt-pages.html"/>
   <link rel="import" href="pages/ark-tekt-parts/ark-tekt-parts.html"/>
   <link rel="import" href="pages/ark-tekt-pieces/ark-tekt-pieces.html"/>
-  
-  
   <!-- endbuild-->
 </head>
 
 <body unresolved>
   
-  <ark-tekt-router></ark-tekt-router>
+  <ark-tekt-router>
+    <ark-tekt-route route="" page=""></ark-tekt-route>
+    <ark-tekt-route route="error" page="ark-tekt-error"></ark-tekt-route>
+    <ark-tekt-route route="dashboard" page="ark-tekt-dashboard"></ark-tekt-route>
+    <ark-tekt-route route="properties" page="ark-tekt-properties"></ark-tekt-route>
+    <ark-tekt-route route="properties/new" page="ark-tekt-properties-new"></ark-tekt-route>
+    <ark-tekt-route route="properties/<int:id>" page="ark-tekt-properties-view"></ark-tekt-route>
+    <ark-tekt-route route="properties/<int:id>/edit" page="ark-tekt-properties-edit"></ark-tekt-route>
+    <ark-tekt-route route="properties/<int:id>/delete" page="ark-tekt-properties-delete"></ark-tekt-route>
+    <ark-tekt-route route="paths" page="ark-tekt-paths"></ark-tekt-route>
+    <ark-tekt-route route="pages" page="ark-tekt-pages"></ark-tekt-route>
+    <ark-tekt-route route="parts" page="ark-tekt-parts"></ark-tekt-route>
+    <ark-tekt-route route="pieces" page="ark-tekt-pieces"></ark-tekt-route>
+  </ark-tekt-router>
   <ark-tekt-page></ark-tekt-page>
 
   <!-- build:js scripts/app.js -->

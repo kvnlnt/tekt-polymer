@@ -9,19 +9,7 @@
             regex: /^<(int|string):(.*)>/, // token finder
             route:'',
             default_hash:'#/dashboard',
-            routes:{
-                '#/error':'ark-tekt-error',
-                '#/dashboard':'ark-tekt-dashboard',
-                '#/properties':'ark-tekt-properties',
-                '#/properties/new':'ark-tekt-properties-new',
-                '#/properties/<int:id>':'ark-tekt-properties-view',
-                '#/properties/<int:id>/edit':'ark-tekt-properties-edit',
-                '#/properties/<int:id>/delete':'ark-tekt-properties-delete',
-                '#/paths':'ark-tekt-paths',
-                '#/pages':'ark-tekt-pages',
-                '#/parts':'ark-tekt-parts',
-                '#/pieces':'ark-tekt-pieces',
-            },
+            routes:{},
         },
 
         /**
@@ -206,6 +194,16 @@
 
         },
 
+        /**
+         * Add route via route element
+         * @param {element} el routing element
+         */
+        addRoute: function(el){
+
+            scope.routes["#/"+el.route] = el.page;
+
+        },
+
         // Fires when an instance of the element is created
         created: function() {
 
@@ -217,6 +215,7 @@
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
         domReady: function() {
 
+            _.each(this.children, this.addRoute);
             scope.poll = setInterval(scope.checkHash, 200);
 
         },

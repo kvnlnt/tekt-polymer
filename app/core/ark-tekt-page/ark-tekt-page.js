@@ -6,14 +6,12 @@
 
         publish:{},
 
-        // Fires when an instance of the element is created
-        created: function() {
-
-            scope = this;
-            ARK.page = this;
-
-        },
-
+        /**
+         * Load a page
+         * @param  {string} page   [description]
+         * @param  {object} params [description]
+         * @return {element}        [description]
+         */
         load: function(page, params){
 
             console.log('load', page, params);
@@ -33,6 +31,15 @@
             // load the page
             scope.appendChild(page);
 
+            return page;
+
+        },
+
+        // Fires when an instance of the element is created
+        created: function() {
+
+            scope = this;
+            ARK.page = this;
 
         },
 
