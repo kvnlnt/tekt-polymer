@@ -43,6 +43,7 @@
          */
         go: function(hash){
 
+            var hash = hash || '#/';
             var route = scope.get(hash);
             var noRoute = _.isEmpty(route);
             var page;
@@ -57,6 +58,8 @@
             scope.route = hash;
             window.location.hash = hash;
             ARK.page.load(page, params);
+
+            return scope.route;
 
         },
 
@@ -77,6 +80,8 @@
 
             // if yes, find route and load
             if(changed){ scope.go(hash); }
+
+            return changed;
 
         },
 
