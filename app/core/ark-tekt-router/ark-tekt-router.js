@@ -51,7 +51,7 @@
             // config
             route  = noRoute ? '#/error' : _.keys(route)[0];
             hash   = noRoute ? '#/error' : hash;
-            params = noRoute ? {} : scope.getParams(route, hash);
+            params = noRoute ? {} : scope.get_params(route, hash);
             page   = scope.routes[route];
 
             // load page
@@ -67,7 +67,7 @@
          * If hash has changed, find route and load new page
          * @return {n/a}
          */
-        checkHash: function(hash){
+        check_hash: function(hash){
 
             // get or set hash
             var hash = hash || window.location.hash;
@@ -81,6 +81,7 @@
             // if yes, find route and load
             if(changed){ scope.go(hash); }
 
+            // has it changed?
             return changed;
 
         },
@@ -91,7 +92,7 @@
          * @param  {string} hash  Example: #/path/1
          * @return {object}       Example: {id:1}
          */
-        getParams: function(route, hash){
+        get_params: function(route, hash){
 
             var params         = {};
             var route_segments = route.split('/');
@@ -148,7 +149,7 @@
                         var type = scope.regex.exec(v);
 
                         // is there a match?
-                        var isRegexMatch = scope.validateType(type[1], b[k]);
+                        var isRegexMatch = scope.validate_type(type[1], b[k]);
 
                         // if yes, add the value, if false,     not a match
                         if(isRegexMatch){
@@ -180,7 +181,7 @@
          * @param  {string|number} param parameter
          * @return {boolean}       
          */
-        validateType: function(type, param){
+        validate_type: function(type, param){
 
             var result;
 
@@ -203,9 +204,10 @@
          * Add route via route element
          * @param {element} el routing element
          */
-        addRoute: function(el){
+        add_route: function(el){
 
             scope.routes["#/"+el.route] = el.page;
+            return scope.routes;
 
         },
 
@@ -220,8 +222,8 @@
         // Fires when the element’s initial set of children and siblings are guaranteed to exist
         domReady: function() {
 
-            _.each(this.children, this.addRoute);
-            scope.poll = setInterval(scope.checkHash, 200);
+            _.each(this.children, this.add_route);
+            scope.poll = setInterval(scope.check_hash, 200);
 
         },
 

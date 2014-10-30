@@ -14,8 +14,6 @@
          */
         load: function(page, params){
 
-            console.log('load', page, params);
-
             // params default
             var params = params || {};
 
