@@ -83,9 +83,6 @@ document.addEventListener('polymer-ready', function() {
         el.add_route(test_route);
         assert.equal(el.routes['#/test/page/new'], 'test-page-new');
 
-
-    // TODO finish testing router
-
     // complete testing
     done();
 
